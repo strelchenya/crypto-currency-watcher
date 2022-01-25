@@ -1,2 +1,3 @@
 # crypto-currency-watcher
- CryptoСurrency watcher
+
+CryptoСurrency watcher
