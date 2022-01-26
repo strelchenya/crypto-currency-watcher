@@ -50,6 +50,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @NotBlank
     @Size(min = 2, max = 5)
     @NoHtml
+    @JoinColumn(name = "symbol")
     private String symbol;
 
     @Column(name = "price_usd", nullable = false)
@@ -62,7 +63,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private BigDecimal priceUsdUponRegistration;
 
-    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date registered = new Date();
@@ -70,7 +71,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles"))
+            uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_role_idx"))
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -93,7 +94,6 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
         this.registered = registered;
         setRoles(roles);
     }
-
 
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);

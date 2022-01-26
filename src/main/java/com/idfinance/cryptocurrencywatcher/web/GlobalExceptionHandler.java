@@ -30,9 +30,13 @@ import static org.springframework.boot.web.error.ErrorAttributeOptions.Include.M
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public static final String EXCEPTION_DUPLICATE_EMAIL = "User with this email already exists!";
+    public static final String EXCEPTION_DUPLICATE_CRYPTOCURRENCY = "This cryptocurrency already exists!";
+    public static final String EXCEPTION_DUPLICATE_ROLE = "A user with this role already exists!";
 
     private static final Map<String, String> CONTAINS_EXCEPTIONS = Map.of(
-            "USER_UNIQUE_EMAIL_IDX", EXCEPTION_DUPLICATE_EMAIL
+            "USER_UNIQUE_EMAIL_IDX", EXCEPTION_DUPLICATE_EMAIL,
+            "CRYPTOCURRENCY_UNIQUE_ID_SYMBOL_NAME_IDX", EXCEPTION_DUPLICATE_CRYPTOCURRENCY,
+            "USER_ROLE_IDX", EXCEPTION_DUPLICATE_ROLE
     );
 
     private final ErrorAttributes errorAttributes;

@@ -14,7 +14,7 @@ public class UserUtil {
 
     public static User createNewFromTo(UserTo userTo) {
         return new User(null, userTo.getName(), userTo.getEmail().toLowerCase(), userTo.getPassword(),
-                userTo.getSymbol(), Role.USER);
+                userTo.getSymbol().toUpperCase(), Role.USER);
     }
 
     public static User updateFromTo(User user, UserTo userTo) {

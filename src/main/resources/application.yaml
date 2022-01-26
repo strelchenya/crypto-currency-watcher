@@ -1,4 +1,11 @@
 spring:
+  task:
+    scheduling:
+      pool:
+        size: 2
+  mvc:
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
   jpa:
     show-sql: true
     open-in-view: false
@@ -25,6 +32,10 @@ spring:
       is-getter: none
     serialization:
       write-dates-as-timestamps: false
+
+  cache:
+    cache-names: cryptocurrency
+    caffeine.spec: maximumSize=1000,expireAfterAccess=60s
 
 logging:
   level:
