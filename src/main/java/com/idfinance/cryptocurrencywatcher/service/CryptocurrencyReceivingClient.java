@@ -11,11 +11,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +30,7 @@ public class CryptocurrencyReceivingClient {
     private static final String SERVER_URL = "https://api.coinlore.net/api/ticker/?id=";
     private static final int TIMER = 60 * 1000;
     private static final int INIT_TIMER = 1000;
-    private static final int VERIFICATION_PERCENTAGE = 1;
+    private static final BigDecimal VERIFICATION_PERCENTAGE = new BigDecimal("1.0");
 
     @Scheduled(fixedDelay = TIMER, initialDelay = INIT_TIMER)
     public void getCryptocurrency() {
@@ -68,23 +68,28 @@ public class CryptocurrencyReceivingClient {
         for (User checkUser : users) {
             log.info("Outdated data: {}", checkUser);
             double priceRatio = (checkUser.getPriceUsd()
-                    .divide(cryptocurrency.getPriceUsd(), 2, RoundingMode.HALF_UP)).doubleValue();
-            int excessPercentage = (int) (Math.abs(1.0 - priceRatio) * 100);
-            if (excessPercentage > VERIFICATION_PERCENTAGE) {
+                    .divide(cryptocurrency.getPriceUsd(), 10, RoundingMode.HALF_UP)).doubleValue();
+            BigDecimal excessPercentage = getExcessPercentage(priceRatio);
+
+            if (excessPercentage.compareTo(VERIFICATION_PERCENTAGE) > 0) {
                 double priceRatioWithRegistration = (checkUser.getPriceUsdUponRegistration()
-                        .divide(cryptocurrency.getPriceUsd(), 2, RoundingMode.HALF_UP)).doubleValue();
-                int excessPercentageRegistration = (int) (Math.abs(1.0 - priceRatioWithRegistration) * 100);
-                String exchangeRateDirection = priceRatioWithRegistration > 1 ? "\u2193" : "\u2191";
+                        .divide(cryptocurrency.getPriceUsd(), 10, RoundingMode.HALF_UP)).doubleValue();
+                BigDecimal excessPercentageRegistration = getExcessPercentage(priceRatioWithRegistration);
+
+                String exchangeRateDirection =
+                        excessPercentageRegistration.compareTo(VERIFICATION_PERCENTAGE) > 0 ? "\u2193" : "\u2191";
 
                 log.warn("COIN: {} {}, percent: {}, {}", checkUser.getSymbol(), exchangeRateDirection,
                         excessPercentageRegistration, checkUser.getName());
-                checkUser.setPriceUsdUponRegistration(cryptocurrency.getPriceUsd());
-                checkUser.setRegistered(new Date());
             }
 
             checkUser.setPriceUsd(cryptocurrency.getPriceUsd());
             log.info("Updated data: {}", checkUser);
             userRepository.save(checkUser);
         }
+    }
+
+    private BigDecimal getExcessPercentage(double value) {
+        return new BigDecimal(String.valueOf(Math.abs(1.0 - value) * 100));
     }
 }
