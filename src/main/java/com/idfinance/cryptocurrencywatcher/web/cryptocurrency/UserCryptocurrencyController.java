@@ -24,7 +24,7 @@ import static com.idfinance.cryptocurrencywatcher.web.cryptocurrency.UserCryptoc
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = CRYPTOCURRENCY_REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-@Tag(name = "Admin Cryptocurrency Controller", description = "Controller for editing cryptocurrency by user.")
+@Tag(name = "User Cryptocurrency Controller", description = "Controller for editing cryptocurrency by user.")
 public class UserCryptocurrencyController {
 
     public static final String CRYPTOCURRENCY_REST_URL = "/api/v1/cryptocurrencies";

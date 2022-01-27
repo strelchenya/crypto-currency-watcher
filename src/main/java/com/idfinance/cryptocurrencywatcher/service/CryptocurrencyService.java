@@ -25,4 +25,9 @@ public class CryptocurrencyService {
     public List<CryptocurrencyTo> getAllTo(){
         return repository.getAllTo();
     }
+
+    public void delete(int id) {
+        log.info("delete {}", id);
+        repository.deleteExisted(id);
+    }
 }
