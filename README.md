@@ -8,12 +8,12 @@
 - Run: `mvn spring-boot:run` in root directory.
 -----------------------------------------------------
 [REST API documentation](http://localhost:8080/swagger-ui.html)  
-###Test credentials:
+Test credentials:
 ```
 User:  user@gmail.com / user
 Admin: admin@gmail.com / admin
 ```
-###Source of information about cryptocurrency rates:
+Source of information about cryptocurrency rates:
 
 [Crypto API | CoinLore](https://www.coinlore.com/cryptocurrency-data-api#3)
 
