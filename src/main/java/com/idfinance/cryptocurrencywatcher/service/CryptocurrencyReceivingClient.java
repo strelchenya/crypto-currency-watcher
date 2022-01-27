@@ -83,9 +83,11 @@ public class CryptocurrencyReceivingClient {
                         excessPercentageRegistration, checkUser.getName());
             }
 
-            checkUser.setPriceUsd(cryptocurrency.getPriceUsd());
-            log.info("Updated data: {}", checkUser);
-            userRepository.save(checkUser);
+            if (excessPercentage.compareTo(VERIFICATION_PERCENTAGE) != 0) {
+                checkUser.setPriceUsd(cryptocurrency.getPriceUsd());
+                log.info("Updated data: {}", checkUser);
+                userRepository.save(checkUser);
+            }
         }
     }
 
