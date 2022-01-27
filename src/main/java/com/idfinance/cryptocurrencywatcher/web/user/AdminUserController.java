@@ -35,6 +35,13 @@ public class AdminUserController extends AbstractUserController {
         return super.get(id);
     }
 
+    @Operation(summary = "Get all users by symbol", description = "Get all users by symbol.")
+    @GetMapping("/by-symbol")
+    public List<User> findAllBySymbol(@RequestParam("symbol") String symbol) {
+        log.info("get cryptocurrency by symbol: {}", symbol);
+        return repository.findAllBySymbolOrderByName(symbol);
+    }
+
     @Operation(summary = "Deleting a user", description = "Removing a user by admin.")
     @Override
     @DeleteMapping("/{id}")

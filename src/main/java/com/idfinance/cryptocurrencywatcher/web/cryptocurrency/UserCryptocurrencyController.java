@@ -41,8 +41,8 @@ public class UserCryptocurrencyController {
     @Cacheable
     @Operation(summary = "Get all cryptocurrencies", description = "Get all cryptocurrency for an authorized user.")
     @GetMapping
-    public List<CryptocurrencyTo> getAll() {
+    public List<CryptocurrencyTo> getAllTo() {
         log.info("get all CryptocurrencyTo for user");
-        return cryptocurrencyService.getAll();
+        return cryptocurrencyService.getAllTo();
     }
 }

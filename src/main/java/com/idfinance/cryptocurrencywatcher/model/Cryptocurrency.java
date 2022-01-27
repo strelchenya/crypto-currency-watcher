@@ -33,7 +33,7 @@ public class Cryptocurrency extends NamedEntity {
     private BigDecimal priceUsd;
 
     @Column(name = "date_time",
-            columnDefinition = "default current_timestamp() on update current_timestamp()",
+            columnDefinition = "default current_timestamp()",
             nullable = false)
     private LocalDateTime dateTime;
 

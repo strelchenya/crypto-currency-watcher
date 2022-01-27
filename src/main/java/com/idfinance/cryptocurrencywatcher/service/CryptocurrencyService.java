@@ -22,7 +22,7 @@ public class CryptocurrencyService {
                 new NotFoundException("Not found cryptocurrency by symbol: " + symbol));
     }
 
-    public List<CryptocurrencyTo> getAll(){
-        return repository.getAll();
+    public List<CryptocurrencyTo> getAllTo(){
+        return repository.getAllTo();
     }
 }

@@ -18,5 +18,5 @@ public interface CryptocurrencyRepository extends BaseRepository<Cryptocurrency>
             FROM Cryptocurrency c\040
             ORDER BY c.name
             """)
-    List<CryptocurrencyTo> getAll();
+    List<CryptocurrencyTo> getAllTo();
 }

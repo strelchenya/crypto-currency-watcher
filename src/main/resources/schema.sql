@@ -8,7 +8,7 @@ CREATE TABLE cryptocurrencies
     symbol    VARCHAR(255) NOT NULL PRIMARY KEY,
     name      VARCHAR(255) NOT NULL,
     price_usd DECIMAL      NOT NULL,
-    date_time DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
+    date_time DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     CONSTRAINT cryptocurrency_unique_id_symbol_name_idx UNIQUE (id, symbol, name)
 );
 
