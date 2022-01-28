@@ -12,7 +12,7 @@
     | Username                  |  Password |    Role    |
     |---------------------------|-----------|------------|
     | user@gmail.com            |   user    |    USER    |
-    | admin@gmail.ru            |   admin   | ADMIN/USER |
+    | admin@gmail.com           |   admin   | ADMIN/USER |
 ## Source of information about cryptocurrency rates:
 
 [Crypto API | CoinLore](https://www.coinlore.com/cryptocurrency-data-api#3)
