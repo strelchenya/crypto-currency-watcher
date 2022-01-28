@@ -5,7 +5,6 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Ticker {
     private int id;
     private String symbol;

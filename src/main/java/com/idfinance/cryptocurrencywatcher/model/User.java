@@ -78,6 +78,11 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
+    public User(User u) {
+        this(u.id, u.name, u.email, u.password, u.symbol, u.priceUsd, u.priceUsdUponRegistration, u.registered,
+                u.roles);
+    }
+
     public User(Integer id, String name, String email, String password, String symbol, Role role, Role... roles) {
         this(id, name, email, password, symbol, null, null, new Date(), EnumSet.of(role, roles));
     }

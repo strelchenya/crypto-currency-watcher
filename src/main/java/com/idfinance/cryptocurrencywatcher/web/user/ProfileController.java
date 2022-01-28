@@ -1,8 +1,6 @@
 package com.idfinance.cryptocurrencywatcher.web.user;
 
-import com.idfinance.cryptocurrencywatcher.model.Cryptocurrency;
 import com.idfinance.cryptocurrencywatcher.model.User;
-import com.idfinance.cryptocurrencywatcher.service.CryptocurrencyService;
 import com.idfinance.cryptocurrencywatcher.to.UserTo;
 import com.idfinance.cryptocurrencywatcher.util.UserUtil;
 import com.idfinance.cryptocurrencywatcher.web.AuthUser;
@@ -31,7 +29,6 @@ import static com.idfinance.cryptocurrencywatcher.util.ValidationUtil.checkNew;
 @Tag(name = "Profile Controller", description = "User profile controller.")
 public class ProfileController extends AbstractUserController {
     static final String REST_URL = "/api/v1/profile";
-
 
     @Operation(summary = "Get a profile", description = "Get the profile of an authenticated user.")
     @GetMapping
